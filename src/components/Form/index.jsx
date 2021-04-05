@@ -8,19 +8,22 @@ import { createPost, updatePost } from "../../actions/posts";
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
-    tags: "",
-    selectedFile: "",
+    tags: [],
+    selectedFile: [],
   });
 
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const post = useSelector((state) =>
-    currentId ? state.posts.find((message) => message._id === currentId) : null
-  );
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  const post = useSelector((state) => {
+    return currentId
+      ? state.posts.find((message) => message._id === currentId)
+      : null;
+  });
 
   useEffect(() => {
     if (post) {
@@ -36,26 +39,36 @@ const Form = ({ currentId, setCurrentId }) => {
   };
   const clear = () => {
     setPostData({
-      creator: "",
       title: "",
       message: "",
-      tags: "",
-      selectedFile: "",
+      tags: [],
+      selectedFile: [],
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (currentId) {
-      dispatch(updatePost(currentId, postData));
-      alert("Update Complete");
+    if (currentId === 0) {
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
       clear();
     } else {
-      dispatch(createPost(postData));
+      dispatch(
+        updatePost(currentId, { ...postData, name: user?.result?.name })
+      );
       clear();
     }
   };
+
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h5" align="center">
+          Please Sign In To Create Your Own Memories or Like Orther Memories!
+        </Typography>
+      </Paper>
+    );
+  }
 
   return (
     <Paper className={classes.paper}>
@@ -68,14 +81,6 @@ const Form = ({ currentId, setCurrentId }) => {
         <Typography variant="h6">
           {currentId ? `Editing "${post.title}"` : "Creating a Memory"}
         </Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={handleChange}
-        />
         <TextField
           name="title"
           variant="outlined"
@@ -112,6 +117,14 @@ const Form = ({ currentId, setCurrentId }) => {
               setPostData({ ...postData, selectedFile: base64 })
             }
           />
+          {/* <input
+            type="file"
+            multiple
+            name="selectedFile"
+            onChange={(e) =>
+              setPostData({ ...postData, selectedFile: e.target.files })
+            }
+          /> */}
         </div>
         <Button
           className={classes.buttonSubmit}
