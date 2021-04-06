@@ -61,7 +61,7 @@ const Post = ({ post, setCurrentId, handleRemove }) => {
       />
       <div className={classes.overlay}>
         <Typography variant="h6">{post.name}</Typography>
-        <Typography variant="body2">
+        <Typography variant="h6">
           {moment(post.createdAt).fromNow()}
         </Typography>
       </div>

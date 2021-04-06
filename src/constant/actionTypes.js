@@ -6,3 +6,5 @@ export const LIKE = "LIKE";
 
 export const AUTH = "AUTH";
 export const LOGOUT = "LOGOUT";
+
+export const DARK_MODE = "DARK_MODE";

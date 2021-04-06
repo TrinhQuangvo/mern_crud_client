@@ -7,12 +7,13 @@ import useStyles from "./styles";
 
 const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.posts);
+
   const classes = useStyles();
 
   return !posts.length ? (
     <div>
       <Paper>
-        <Typography variant="h6" gutterBottom>
+        <Typography gutterBottom>
           No Post Found!
         </Typography>
       </Paper>
