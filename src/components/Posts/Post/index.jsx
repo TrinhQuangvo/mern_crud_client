@@ -22,7 +22,6 @@ const Post = ({ post, setCurrentId, handleRemove }) => {
   const classes = useStyle();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
-
   const Likes = () => {
     if (post.likes.length > 0) {
       return post.likes.find(
@@ -61,9 +60,7 @@ const Post = ({ post, setCurrentId, handleRemove }) => {
       />
       <div className={classes.overlay}>
         <Typography variant="h6">{post.name}</Typography>
-        <Typography variant="h6">
-          {moment(post.createdAt).fromNow()}
-        </Typography>
+        <Typography variant="h6">{moment(post.createdAt).fromNow()}</Typography>
       </div>
       {(user?.result?.googleId === post?.creator ||
         user?.result?._id === post?.creator) && (
@@ -83,8 +80,7 @@ const Post = ({ post, setCurrentId, handleRemove }) => {
         </Typography>
       </div>
       <CardContent>
-        <Typography className={classes.title} variant="h5
-        " gutterBottom>
+        <Typography className={classes.title} gutterBottom>
           {post.message}
         </Typography>
       </CardContent>

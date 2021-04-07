@@ -19,17 +19,21 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const user = JSON.parse(localStorage.getItem("profile"));
 
+  const [darkMode, setDarkmode] = useState(false);
+
   const post = useSelector((state) => {
     return currentId
-      ? state.posts.find((message) => message._id === currentId)
+      ? state.posts.postMessage.find((message) => message._id === currentId)
       : null;
   });
-
+ 
   useEffect(() => {
     if (post) {
       setPostData(post);
     }
-  }, [post]);
+
+    setDarkmode(JSON.parse(localStorage.getItem("dark-mode")));
+  }, [post, darkMode]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

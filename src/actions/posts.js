@@ -13,7 +13,7 @@ export const getPosts = async (dispatch) => {
 
 export const createPost = (post) => async (dispatch) => {
   try {
-    const { data } = await api.createPost(post); 
+    const { data } = await api.createPost(post);
     dispatch({ type: Action.CREATE, payload: data });
   } catch (error) {
     console.log(error);
@@ -39,8 +39,12 @@ export const deletePost = (id) => async (dispatch) => {
 };
 
 export const likePost = (id) => async (dispatch) => {
+  // id is a id get via UI's click
+  const user = JSON.parse(localStorage.getItem("profile")); 
+
   try {
-    const { data } = await api.likePost(id);
+    // return a promise included "data" inside
+    const { data } = await api.likePost(id, user?.token);
     dispatch({ type: Action.LIKE, payload: data });
   } catch (error) {
     console.log(error);

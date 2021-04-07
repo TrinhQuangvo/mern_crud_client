@@ -18,7 +18,7 @@ import { LOGOUT, DARK_MODE } from "./../../constant/actionTypes";
 import { DarkMode } from "./../../actions/ui.actions";
 
 const Navbar = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile"))); 
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyle();
