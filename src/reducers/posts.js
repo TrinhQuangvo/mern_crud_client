@@ -15,7 +15,7 @@ const posts = (state = [], action) => {
     case CREATE:
       return [...state.postMessage, action.payload];
     case UPDATE:
-      return state.map((post) =>
+      return state.postMessage.map((post) =>
         post._id === action.payload._id ? action.payload : post
       );
     case DELETE:
