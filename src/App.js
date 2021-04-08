@@ -1,10 +1,11 @@
 import React from "react";
 import { Container } from "@material-ui/core";
-import { BrowserRouter, Switch, Route } from "react-router-dom"; 
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Auth from "./components/Auth";
+import SearchForm from "./components/SearchForm";
 
 const App = () => (
   <BrowserRouter>
@@ -13,6 +14,7 @@ const App = () => (
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/Auth" exact component={Auth} />
+        <Route path="/Search" exact component={SearchForm} />
       </Switch>
     </Container>
   </BrowserRouter>

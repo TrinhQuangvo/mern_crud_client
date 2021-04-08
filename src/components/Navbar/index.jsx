@@ -1,10 +1,7 @@
 import {
   AppBar,
   Avatar,
-  Button,
-  FormControlLabel,
-  FormGroup,
-  Switch,
+  Button, 
   Toolbar,
   Typography,
 } from "@material-ui/core";
@@ -14,21 +11,14 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import decode from "jwt-decode";
 import image from "./../../images/memories.png";
 import useStyle from "./styles";
-import { LOGOUT, DARK_MODE } from "./../../constant/actionTypes";
-import { DarkMode } from "./../../actions/ui.actions";
+import { LOGOUT } from "./../../constant/actionTypes"; 
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const classes = useStyle();
-  const [darkMode, setDarkMode] = useState(false);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile"))); 
- 
-  const toggleChecked = (e) => {
-    setDarkMode((darkMode) => !darkMode);
-    dispatch(DarkMode({ type: DARK_MODE, payload: e.target.checked }));
-  };
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
   useEffect(() => {
     const token = user?.token;
@@ -37,7 +27,7 @@ const Navbar = () => {
       if (decodedToken.exp * 1000 < new Date().getTime()) {
         logout();
       }
-    } 
+    }
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
@@ -48,11 +38,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar
-      className={darkMode ? classes.appBar + " dark" : classes.appBar}
-      position="static"
-      color="inherit"
-    >
+    <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
         <Typography
           component={Link}
@@ -76,6 +62,7 @@ const Navbar = () => {
             >
               {user.name}
             </Avatar>
+      
             <Typography className={classes.name} variant="h5">
               {user.result.name}
             </Typography>
@@ -98,13 +85,6 @@ const Navbar = () => {
             Sign Up
           </Button>
         )}
-        <FormGroup>
-          <FormControlLabel
-            control={<Switch checked={darkMode} onChange={toggleChecked} />}
-            label="Dark Mode"
-            labelPlacement="bottom"
-          />
-        </FormGroup>
       </Toolbar>
     </AppBar>
   );

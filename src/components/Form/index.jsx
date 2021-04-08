@@ -120,15 +120,7 @@ const Form = ({ currentId, setCurrentId }) => {
             onDone={({ base64 }) =>
               setPostData({ ...postData, selectedFile: base64 })
             }
-          />
-          {/* <input
-            type="file"
-            multiple
-            name="selectedFile"
-            onChange={(e) =>
-              setPostData({ ...postData, selectedFile: e.target.files })
-            }
-          /> */}
+          /> 
         </div>
         <Button
           className={classes.buttonSubmit}
