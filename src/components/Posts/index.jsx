@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 
 import Post from "./Post";
 import useStyles from "./styles";
-import Pagination from "../Pagination";
 
 const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.posts);
+
   const classes = useStyles();
 
   return !posts.postMessage ? (
@@ -28,8 +28,6 @@ const Posts = ({ setCurrentId }) => {
           <Post post={post} setCurrentId={setCurrentId} />
         </Grid>
       ))}
-
-      <Pagination currentPage={posts.currentPage} totalPage={posts.totalPage} />
     </Grid>
   );
 };

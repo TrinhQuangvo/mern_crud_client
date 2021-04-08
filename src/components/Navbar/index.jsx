@@ -9,8 +9,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import decode from "jwt-decode";
 import image from "./../../images/memories.png";
 import useStyle from "./styles";
@@ -18,14 +18,13 @@ import { LOGOUT, DARK_MODE } from "./../../constant/actionTypes";
 import { DarkMode } from "./../../actions/ui.actions";
 
 const Navbar = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile"))); 
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
   const classes = useStyle();
   const [darkMode, setDarkMode] = useState(false);
-
-  const config = useSelector((state) => state.uiReducer);
-  console.log(config);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile"))); 
+ 
   const toggleChecked = (e) => {
     setDarkMode((darkMode) => !darkMode);
     dispatch(DarkMode({ type: DARK_MODE, payload: e.target.checked }));
@@ -38,10 +37,9 @@ const Navbar = () => {
       if (decodedToken.exp * 1000 < new Date().getTime()) {
         logout();
       }
-    }
-    dispatch(DarkMode(window.localStorage.getItem("theme")));
+    } 
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [dispatch]);
+  }, [location]);
 
   const logout = () => {
     dispatch({ type: LOGOUT });

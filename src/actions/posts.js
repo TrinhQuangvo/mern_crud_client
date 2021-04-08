@@ -1,11 +1,12 @@
 import * as api from "./../api";
 import * as Action from "../constant/actionTypes";
+import axios from "axios";
 
 // action creators
-export const getPosts = async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
   try {
-    const { data } = await api.fetchPosts();
-    dispatch({ type: Action.FETCH_ALL, payload: data });
+    const res = await axios.get(`http://localhost:5000/posts?page=${page}`);
+    dispatch({ type: Action.FETCH_ALL, payload: res.data });
   } catch (error) {
     console.log(error);
   }
@@ -14,7 +15,7 @@ export const getPosts = async (dispatch) => {
 export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.createPost(post);
-    dispatch({ type: Action.CREATE, payload: data });
+    dispatch({ type: Action.CREATE, payload: data.posts });
   } catch (error) {
     console.log(error);
   }
@@ -40,7 +41,7 @@ export const deletePost = (id) => async (dispatch) => {
 
 export const likePost = (id) => async (dispatch) => {
   // id is a id get via UI's click
-  const user = JSON.parse(localStorage.getItem("profile")); 
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   try {
     // return a promise included "data" inside

@@ -11,7 +11,7 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-export const fetchPosts = () => API.get(`/posts?page`);
+export const fetchPosts = (newPage = 1) => API.get(`/posts?page=${newPage}`);
 
 export const createPost = (newPost) => API.post("/posts", newPost);
 
