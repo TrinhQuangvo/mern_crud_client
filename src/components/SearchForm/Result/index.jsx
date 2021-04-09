@@ -1,13 +1,11 @@
 import { Button, Grid, Typography } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React from "react";
 import Post from "../../Posts/Post";
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchItems } from "../../../actions/posts";
-import useStyles from "./styles.js";
+import { getSearchItems } from "../../../actions/posts"; 
 
-const Results = ({ posts, setCurrentId, isSearchPage, searchValue }) => {
-  console.log({ searchValue });
-  const classes = useStyles();
+const Results = ({ posts, isSearchPage, searchValue }) => {
+  console.log({ searchValue }); 
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
 

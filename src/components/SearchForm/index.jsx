@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Container,
   TextField,
   InputAdornment,
   IconButton,
-  Grid,
-  Typography,
-  Paper,
+  Grid, 
 } from "@material-ui/core";
 
 import useStyle from "./styles";
