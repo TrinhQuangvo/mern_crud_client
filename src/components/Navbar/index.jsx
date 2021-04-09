@@ -1,17 +1,11 @@
-import {
-  AppBar,
-  Avatar,
-  Button, 
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { AppBar, Avatar, Button, Toolbar, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import decode from "jwt-decode";
-import image from "./../../images/memories.png";
+import image from "./../../images/nodeandreact.png";
 import useStyle from "./styles";
-import { LOGOUT } from "./../../constant/actionTypes"; 
+import { LOGOUT } from "./../../constant/actionTypes";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -47,9 +41,8 @@ const Navbar = () => {
           variant="h6"
           align="center"
         >
-          CRUD WITH MERN STACK
+          <img className={classes.image} src={image} alt="icon" height="60" />
         </Typography>
-        <img className={classes.image} src={image} alt="icon" height="60" />
       </div>
 
       <Toolbar className={classes.Toolbar}>
@@ -62,7 +55,7 @@ const Navbar = () => {
             >
               {user.name}
             </Avatar>
-      
+
             <Typography className={classes.name} variant="h5">
               {user.result.name}
             </Typography>

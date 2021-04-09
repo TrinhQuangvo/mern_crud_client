@@ -12,6 +12,17 @@ export const getPosts = (page) => async (dispatch) => {
   }
 };
 
+export const getSearchItems = (query, page) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:5000/posts/search?q=${query}&page=${page}`
+    );
+    dispatch({ type: Action.SEARCH, payload: res.data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.createPost(post);

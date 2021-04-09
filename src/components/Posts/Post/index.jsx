@@ -18,7 +18,7 @@ import moment from "moment";
 
 import { deletePost, likePost } from "../../../actions/posts";
 
-const Post = ({ post, setCurrentId, handleRemove }) => {
+const Post = ({ post, setCurrentId, handleRemove, isSearchPage }) => {
   const classes = useStyle();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -62,18 +62,20 @@ const Post = ({ post, setCurrentId, handleRemove }) => {
         <Typography variant="h6">{post.name}</Typography>
         <Typography variant="h6">{moment(post.createdAt).fromNow()}</Typography>
       </div>
-      {(user?.result?.googleId === post?.creator ||
-        user?.result?._id === post?.creator) && (
-        <div className={classes.overlay2}>
-          <Button
-            style={{ color: "white" }}
-            size="small"
-            onClick={() => setCurrentId(post._id)}
-          >
-            <MoreHorizIcon fontSize="default" />
-          </Button>
-        </div>
-      )}
+      {isSearchPage
+        ? ""
+        : (user?.result?.googleId === post?.creator ||
+            user?.result?._id === post?.creator) && (
+            <div className={classes.overlay2}>
+              <Button
+                style={{ color: "white" }}
+                size="small"
+                onClick={() => setCurrentId(post._id)}
+              >
+                <MoreHorizIcon fontSize="default" />
+              </Button>
+            </div>
+          )}
       <div className={classes.details}>
         <Typography variant="h5" gutterBottom>
           {post.tags.map((tag) => `#${tag} `)}
@@ -93,17 +95,19 @@ const Post = ({ post, setCurrentId, handleRemove }) => {
         >
           <Likes />
         </Button>
-        {(user?.result?.googleId === post?.creator ||
-          user?.result?._id === post?.creator) && (
-          <Button
-            size="small"
-            color="primary"
-            onClick={() => dispatch(deletePost(post._id))}
-          >
-            <DeleteIcon fontSize="small" />
-            Delete
-          </Button>
-        )}
+        {isSearchPage
+          ? ""
+          : (user?.result?.googleId === post?.creator ||
+              user?.result?._id === post?.creator) && (
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => dispatch(deletePost(post._id))}
+              >
+                <DeleteIcon fontSize="small" />
+                Delete
+              </Button>
+            )}
       </CardActions>
     </Card>
   );

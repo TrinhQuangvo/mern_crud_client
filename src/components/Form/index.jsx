@@ -18,8 +18,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
 
   const user = JSON.parse(localStorage.getItem("profile"));
-
-  const [darkMode, setDarkmode] = useState(false);
+ 
 
   const post = useSelector((state) => {
     return currentId
@@ -31,9 +30,8 @@ const Form = ({ currentId, setCurrentId }) => {
     if (post) {
       setPostData(post);
     }
-
-    setDarkmode(JSON.parse(localStorage.getItem("dark-mode")));
-  }, [post, darkMode]);
+ 
+  }, [post]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

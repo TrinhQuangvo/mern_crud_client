@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Post from "./Post";
 import useStyles from "./styles";

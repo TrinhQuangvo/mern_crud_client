@@ -49,7 +49,7 @@ const Home = () => {
           </Typography>
           <Button
             disabled={
-              state.posts.prevPage >= state.posts.totalPage ? true : false
+              state.posts.currentPage === state.posts.totalPage ? true : false
             }
             onClick={() => FetchData(state.posts.nextPage)}
           >

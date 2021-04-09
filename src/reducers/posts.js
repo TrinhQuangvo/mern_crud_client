@@ -4,11 +4,14 @@ import {
   UPDATE,
   DELETE,
   LIKE,
+  SEARCH,
 } from "../constant/actionTypes";
 // state is represent for posts
 
 const posts = (state = [], action) => {
   switch (action.type) {
+    case SEARCH: 
+      return action.payload;
     case FETCH_ALL:
       return action.payload;
     case CREATE:
