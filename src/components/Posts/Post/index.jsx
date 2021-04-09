@@ -29,7 +29,6 @@ const Post = ({ post, setCurrentId, handleRemove, isSearchPage }) => {
       ) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
-
           {post.likes.length > 2
             ? `You and ${post.likes.length - 1} others`
             : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}

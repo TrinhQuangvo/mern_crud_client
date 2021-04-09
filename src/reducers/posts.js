@@ -10,7 +10,7 @@ import {
 
 const posts = (state = [], action) => {
   switch (action.type) {
-    case SEARCH: 
+    case SEARCH:
       return action.payload;
     case FETCH_ALL:
       return action.payload;
@@ -25,7 +25,9 @@ const posts = (state = [], action) => {
     case DELETE:
       return state.filter((post) => post.id !== action.payload);
     case LIKE:
-      return state.map((post) =>
+      console.log(state);
+      console.log(action.payload)
+      return state.postMessage.map((post) =>
         post._id === action.payload._id ? action.payload : post
       );
     default:
