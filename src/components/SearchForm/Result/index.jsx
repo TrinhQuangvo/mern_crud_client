@@ -2,10 +2,10 @@ import { Button, Grid, Typography } from "@material-ui/core";
 import React from "react";
 import Post from "../../Posts/Post";
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchItems } from "../../../actions/posts"; 
+import { getSearchItems } from "../../../actions/posts";
 
 const Results = ({ posts, isSearchPage, searchValue }) => {
-  console.log({ searchValue }); 
+  console.log({ searchValue });
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -13,9 +13,9 @@ const Results = ({ posts, isSearchPage, searchValue }) => {
     dispatch(getSearchItems(searchValue.value, page));
   };
 
-  //   useEffect(() => {
-  //     FetchData();
-  //   }, []);
+  // useEffect(() => {
+  //   FetchData();
+  // }, [FetchData]);
   return (
     <>
       <Grid item xs={12}>
@@ -39,7 +39,9 @@ const Results = ({ posts, isSearchPage, searchValue }) => {
         Previous
       </Button>
       <Button
-        disabled={state.posts.currentPage === state.posts.totalPage ? true : false}
+        disabled={
+          state.posts.currentPage === state.posts.totalPage ? true : false
+        }
         onClick={() => FetchData(searchValue, state.posts.nextPage)}
       >
         Next

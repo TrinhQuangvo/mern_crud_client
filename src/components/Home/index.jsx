@@ -18,8 +18,8 @@ const Home = () => {
     dispatch(getPosts(page));
   };
   useEffect(() => {
-    FetchData(1);
-  }, [currentId]);
+    FetchData();
+  }, [currentId,FetchData]);
 
   return (
     <Grow in>

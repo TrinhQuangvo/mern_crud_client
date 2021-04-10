@@ -22,6 +22,7 @@ const Post = ({ post, setCurrentId, handleRemove, isSearchPage }) => {
   const classes = useStyle();
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
+
   const Likes = () => {
     if (post.likes.length > 0) {
       return post.likes.find(
@@ -29,6 +30,7 @@ const Post = ({ post, setCurrentId, handleRemove, isSearchPage }) => {
       ) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
+
           {post.likes.length > 2
             ? `You and ${post.likes.length - 1} others`
             : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}

@@ -23,10 +23,8 @@ const posts = (state = [], action) => {
           : post.postMessage
       );
     case DELETE:
-      return state.filter((post) => post.id !== action.payload);
+      return state.postMessage.filter((post) => post.id !== action.payload);
     case LIKE:
-      console.log(state);
-      console.log(action.payload)
       return state.postMessage.map((post) =>
         post._id === action.payload._id ? action.payload : post
       );

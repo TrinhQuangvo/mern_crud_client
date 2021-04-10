@@ -4,7 +4,7 @@ import {
   TextField,
   InputAdornment,
   IconButton,
-  Grid, 
+  Grid,
 } from "@material-ui/core";
 
 import useStyle from "./styles";
@@ -19,7 +19,6 @@ const SearchForm = () => {
   const isSearchPage = true;
 
   const state = useSelector((state) => state);
-  console.log(state.posts.getSearchPosts);
 
   const dispatch = useDispatch();
 
@@ -40,8 +39,8 @@ const SearchForm = () => {
 
   // useEffect(() => {
   //   //thứ tự chạy render -> useEffect -> gọi hàm FetchSearchData() 2 lần 1 lần khi giá trị rỗng khi component và 1 lần sau khi submit (unmouting <3) :D
-  //   FetchSearchData("", 1);
-  // }, []);
+  //   FetchSearchData();
+  // }, [FetchSearchData, currentId]);
 
   if (!onSubmit) {
     return;
