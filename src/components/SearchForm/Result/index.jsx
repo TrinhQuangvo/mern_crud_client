@@ -1,8 +1,10 @@
-import { Button, Grid, Typography } from "@material-ui/core";
-import React from "react";
-import Post from "../../Posts/Post";
+import { Button, CircularProgress, Grid, Typography } from "@material-ui/core";
+import React, { lazy, Suspense } from "react";
+//import Post from "../../Posts/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { getSearchItems } from "../../../actions/posts";
+
+const Post = lazy(() => import("../../Posts/Post"));
 
 const Results = ({ posts, isSearchPage, searchValue }) => {
   console.log({ searchValue });
@@ -25,13 +27,15 @@ const Results = ({ posts, isSearchPage, searchValue }) => {
         </Typography>
       </Grid>
 
-      <Grid spacing={3} container justify="space-between">
-        {state.posts.getSearchPosts.map((post) => (
-          <Grid key={post._id} item xs={12} sm={6} md={6}>
-            <Post post={post} isSearchPage={isSearchPage} />
-          </Grid>
-        ))}
-      </Grid>
+      <Suspense fallback={<CircularProgress />}>
+        <Grid spacing={3} container justify="space-between">
+          {state.posts.getSearchPosts.map((post) => (
+            <Grid key={post._id} item xs={12} sm={6} md={6}>
+              <Post post={post} isSearchPage={isSearchPage} />
+            </Grid>
+          ))}
+        </Grid>
+      </Suspense>
       <Button
         disabled={state.posts.prevPage < 1 ? true : false}
         onClick={() => FetchData(searchValue, state.posts.prevPage)}

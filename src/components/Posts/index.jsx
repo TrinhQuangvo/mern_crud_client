@@ -16,11 +16,7 @@ const Posts = ({ setCurrentId }) => {
   };
 
   return !posts.postMessage ? (
-    <div>
-      <Paper>
-        <Typography gutterBottom>No Post Found!</Typography>
-      </Paper>
-    </div>
+    <div>""</div>
   ) : (
     <Grid
       className={classes.container}

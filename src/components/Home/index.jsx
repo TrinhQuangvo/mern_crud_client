@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Button, Container, Grid, Grow, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../actions/posts";
 import useStyles from "./styles";
 
-import Posts from "./../Posts";
+//import Posts from "./../Posts";
 import Form from "./../Form";
+const Posts = lazy(() => import('./../Posts'))
 const Home = () => {
   const [currentId, setCurrentId] = useState(0);
 
@@ -19,7 +20,7 @@ const Home = () => {
   };
   useEffect(() => {
     FetchData();
-  }, [currentId,FetchData]);
+  }, [currentId, FetchData]);
 
   return (
     <Grow in>
@@ -30,9 +31,11 @@ const Home = () => {
           alignItems="stretch"
           spacing={3}
         >
-          <Grid item xs={12} sm={7}>
-            <Posts setCurrentId={setCurrentId} />
-          </Grid>
+          <Suspense fallback={<Typography>Loading...</Typography>}>
+            <Grid item xs={12} sm={7}>
+              <Posts setCurrentId={setCurrentId}></Posts>
+            </Grid>
+          </Suspense>
           <Grid item xs={12} sm={4}>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
           </Grid>
